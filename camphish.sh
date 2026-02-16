@@ -92,7 +92,8 @@ for i in {1..30}; do
     sleep 2
     # CRITICAL: Check if file exists AND has content before grep
     if [[ -f ".cloudflared.log" ]] && [[ -s ".cloudflared.log" ]]; then
-        link=$(grep -o 'https://[-0-9a-z]*\.trycloudflare.com' .cloudflared.log 2>/dev/null | head -n 1)
+        # Try both JSON format and plain text format
+        link=$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' .cloudflared.log 2>/dev/null | head -n 1)
         if [[ -n "$link" ]]; then 
             break
         fi
