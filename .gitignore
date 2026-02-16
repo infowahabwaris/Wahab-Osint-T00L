@@ -1,0 +1,29 @@
+# Logs
+*.log
+saved.ip.txt
+saved.locations.txt
+current_location.txt
+current_location.bak
+LocationLog.log
+LocationError.log
+Log.log
+ip.txt
+device_info.txt
+
+# Executables
+ngrok
+ngrok.exe
+cloudflared
+cloudflared.exe
+php/
+
+# Directories
+saved_locations/
+.cloudflared/
+
+# Temporary files
+index.php
+index2.html
+index3.html
+*.html.bak
+*.tmp
