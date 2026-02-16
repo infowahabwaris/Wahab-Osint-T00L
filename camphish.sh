@@ -263,7 +263,8 @@ printf "\e[1;92m[\e[0m+\e[1;92m] Starting php server...\n"
 php -S 127.0.0.1:3333 > /dev/null 2>&1 & 
 sleep 2
 printf "\e[1;92m[\e[0m+\e[1;92m] Starting cloudflared tunnel...\n"
-rm -rf .cloudflared.log > /dev/null 2>&1 &
+rm -rf .cloudflared.log > /dev/null 2>&1
+touch .cloudflared.log
 
 if [[ "$windows_mode" == true ]]; then
     ./cloudflared.exe tunnel -url 127.0.0.1:3333 --logfile .cloudflared.log > /dev/null 2>&1 &
@@ -271,7 +272,8 @@ else
     ./cloudflared tunnel -url 127.0.0.1:3333 --logfile .cloudflared.log > /dev/null 2>&1 &
 fi
 
-sleep 10
+printf "\e[1;92m[\e[0m+\e[1;92m] Waiting for direct link...\n"
+sleep 15
 link=$(grep -o 'https://[-0-9a-z]*\.trycloudflare.com' ".cloudflared.log")
 if [[ -z "$link" ]]; then
 printf "\e[1;31m[!] Direct link is not generating, check following possible reason  \e[0m\n"
